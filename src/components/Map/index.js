@@ -25,22 +25,7 @@ export default function Map() {
       }
     
       useEffect(() => {
-        navigator.geolocation.getCurrentPosition(
-          () => {
-            getCords();
-          },
-          (err) => {
-            console.log(err);
-            if (err.code === 2) {
-              getCords();
-            }
-          },
-          {
-            enableHighAccuracy: true,
-            timeout: 20000,
-            maximumAge: 1000,
-          }
-        );
+        getCords();
       }, []);
     function handleInputField(data) {
         try {
