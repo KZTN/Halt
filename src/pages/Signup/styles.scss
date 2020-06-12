@@ -1,0 +1,95 @@
+section#signup {
+  height: 100vh;
+  width: 100%;
+  display: flex;
+  &::after {
+    content: "";
+    background-image: url("../../assets/home-background.jpg");
+    background-size: cover;
+    opacity: 0.5;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    bottom: 0;
+    right: 0;
+    position: absolute;
+    z-index: -1;
+  }
+}
+
+section#signup .content {
+  padding: 2rem 0rem;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+  align-items: center;
+  h1 {
+    color: #333;
+    font-size: 48px;
+    margin-bottom: 30px;
+  }
+}
+section#signup .content .main-content {
+  background: rgba(245, 245, 242, 0.9);
+  padding: 2rem 0 0 0;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+  border-radius: 8px;
+}
+section#signup .content form {
+  padding: 0 1.3rem;
+  margin-top: 20px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  & * {
+    margin-bottom: 20px;
+  }
+}
+section#signup .content form label {
+  text-align: left;
+  margin-right: auto;
+  font-size: 18px;
+}
+section#signup .content form input {
+  width: 300px;
+  padding: 0.7rem 0.5rem;
+  border-radius: 8px;
+  border: 0;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+  font-size: 22px;
+  padding: 0.75rem 1.25rem;
+  &::placeholder {
+    color: #777;
+  }
+}
+section#signup .content .login-actions {
+  margin-top: auto;
+  text-align: center;
+  background: #dfdfdf;
+  border-bottom-left-radius: 8px;
+  border-bottom-right-radius: 8px;
+  padding: 1rem;
+  & button {
+    border: 0;
+    background: transparent;
+    font-size: 16px;
+    color: #159;
+    cursor: pointer;
+    text-decoration: underline;
+  }
+}
+section#signup .content form button {
+  width: 300px;
+  margin-bottom: 50px;
+  border: 0;
+  background: #f5b22d;
+  color: #fff;
+  border-radius: 8px;
+  font-size: 22px;
+  padding: 0.7rem;
+  cursor: pointer;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+}

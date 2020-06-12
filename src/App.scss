@@ -3,7 +3,8 @@
 :root {
   --common-green: #00ff7f;
   --common-blue: #7f00ff;
-  --common-white: #f5f5f2;
+  --common-background: #f9f4f0;
+  --common-text-black: #3e3b34;
   --common-text-gray: #939da5;
   --common-text-graydark: #6b757d;
 }
@@ -15,8 +16,14 @@
   box-sizing: border-box;
 }
 
+html,
+body,
+#root {
+  min-height: 100%;
+}
+
 html {
-  background: #f9f4f0;
+  background: var(--common-background);
   -webkit-font-smoothing: antialiased !important;
   scroll-behavior: smooth;
   overflow-x: hidden;
