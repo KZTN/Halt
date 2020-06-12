@@ -53,12 +53,12 @@ export default function Map() {
             if (result) {
                 setFieldpressed(true);
                 if (!isMobile) {
-                    setzoomChanged(6);
+                    setzoomChanged(13);
                     setTimeout(() => {
-                        setzoomChanged(10);
+                        setzoomChanged(15);
                     }, 500);
                 } else {
-                    setzoomChanged(10);
+                    setzoomChanged(15);
                 }
                 setElem({
                     lat: result[0].location.coordinates[0],
