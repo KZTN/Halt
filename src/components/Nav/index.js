@@ -1,14 +1,14 @@
 import React, { useState } from "react";
 import "./styles.scss";
 import {
-  FaBars,
   FaUser,
   FaHeart,
   FaQuestionCircle,
   FaInfoCircle,
 } from "react-icons/fa";
+import { Squash as Hamburger } from "hamburger-react";
 import { Link } from "react-router-dom";
-import { isMobile } from "react-device-detect";
+import Logo from "../../assets/logo.png";
 export default function Form() {
   const [isvisible, setIsvisible] = useState(false);
   function toggleNavMenu() {
@@ -22,9 +22,12 @@ export default function Form() {
     <section id="nav">
       <div className="content">
         <nav>
-          <h1>Halt</h1>{" "}
+          <div className="logo">
+            <img src={Logo} alt="" />
+            <h1>Halt</h1>
+          </div>
           <button onClick={toggleNavMenu}>
-            <FaBars color="#222" size={32} />
+            <Hamburger toggled={isvisible} toggle={setIsvisible} />{" "}
           </button>
         </nav>
 
