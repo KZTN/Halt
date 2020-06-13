@@ -12,6 +12,7 @@ let cordArr = [];
 Arrcoordinates.map((coordinate) =>
     cordArr.push({ lat: coordinate[1], lng: coordinate[0] })
 );
+
 export default function Map() {
     const [elem, setElem] = useState({ lat: -23.46278, lng:  -46.53333 });
     const [fieldpressed, setFieldpressed] = useState(false);
@@ -69,6 +70,7 @@ export default function Map() {
                     styles: styles,
                     mapTypeControl: false,
                     streetViewControl: false,
+                    fullscreenControl: false,
                 }}
             >
                 <Polygon
@@ -88,25 +90,25 @@ export default function Map() {
                             icon={
                                 city.danger === 4
                                     ? {
-                                          url: require("./circle.png"),
+                                          url: require("./pin.png"),
                                           scaledSize: new window.google.maps.Size(
-                                              9,
-                                              9
+                                              20,
+                                              20
                                           ),
                                       }
                                     : city.danger === 3
                                     ? {
-                                          url: require("./circle_y.png"),
+                                          url: require("./pin.png"),
                                           scaledSize: new window.google.maps.Size(
-                                              9,
-                                              9
+                                              20,
+                                              20
                                           ),
                                       }
                                     : {
-                                          url: require("./circle_b.png"),
+                                          url: require("./pin.png"),
                                           scaledSize: new window.google.maps.Size(
-                                              9,
-                                              9
+                                              20,
+                                              20
                                           ),
                                       }
                             }
