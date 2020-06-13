@@ -50,7 +50,7 @@ export default function Login({history}) {
             <button type="submit">Entrar</button>
           </form>
           <div className="login-actions">
-            <span>Novo no algo? </span>
+            <span>Novo no Halt? </span>
             <Link to="/signup">
               <button>Cadastre-se</button>
             </Link>

@@ -1,11 +1,15 @@
-import React from "react";
+import React, {useEffect} from "react";
 import { withScriptjs, withGoogleMap } from "react-google-maps";
 import MapContainer from "../../components/Map";
 import Nav from "../../components/Nav";
 import "./styles.scss";
-export default function Dashboard() {
+export default function Dashboard({history}) {
   const MapWrapped = withScriptjs(withGoogleMap(MapContainer));
-
+  useEffect(() => {
+    if(!localStorage.getItem("id")) {
+      history.push("/login");
+    }
+  }, [history]);
   return (
     <>
       <Nav />
