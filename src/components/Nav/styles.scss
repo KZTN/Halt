@@ -51,7 +51,7 @@ section#nav .content ul.side-nav-visible {
   flex-direction: column;
   top: 60px;
   right: 0px;
-  width: 160px;
+  width: 150px;
   height: 100vh;
   background: rgba(0, 168, 91, 0.8);
   z-index: 0;
@@ -66,8 +66,8 @@ section#nav .content ul.side-nav-hidden {
   display: flex;
   flex-direction: column;
   top: 60px;
-  right: -160px;
-  width: 160px;
+  right: -150px;
+  width: 150px;
   height: 100vh;
   background: rgba(0, 168, 91, 0.8);
   z-index: 0;
@@ -81,11 +81,11 @@ section#nav .content ul.side-nav-visible li.nav-item {
   align-items: center;
   padding: 0.7rem 0;
   font-weight: 100;
-  color: #333;
+  color: #fff;
   font-size: 18px;
   cursor: pointer;
   &:hover {
-    background: rgba(0, 168, 91, 0.5);
+    background: rgba(0, 0, 0, 0.2);
   }
 }
 section#nav .content ul.side-nav-hidden li.nav-item {
@@ -94,11 +94,11 @@ section#nav .content ul.side-nav-hidden li.nav-item {
   align-items: center;
   padding: 0.7rem 0;
   font-weight: 100;
-  color: #333;
+  color: #fff;
   font-size: 18px;
   cursor: pointer;
   &:hover {
-    background: rgba(0, 168, 91, 0.5);
+    background: rgba(0, 0, 0, 0.2);
   }
 }
 @media (max-width: 650px) {
