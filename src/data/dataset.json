@@ -37,6 +37,7 @@
       "vegan_seal": true,
       "vegetarian_seal": true,
       "lgbt_seal": true,
+      "covid_seal": true,
       "wifi_seal": true,
       "location": {
         "coordinates": [-23.4080171, -46.354546],
@@ -58,6 +59,7 @@
       "woman_seal": true,
       "vegan_seal": true,
       "vegetarian_seal": true,
+      "covid_seal": true,
       "lgbt_seal": true,
       "wifi_seal": true,
       "location": {

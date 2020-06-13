@@ -3,8 +3,8 @@ import { GoogleMap, Marker, InfoWindow, Polygon } from "react-google-maps";
 import { isMobile } from "react-device-detect";
 import styles from "./GoogleMapStyles.json";
 import "./styles.scss";
-import Form from "../Form";
-import moment from 'moment';
+import Modal from "../Modal";
+import moment from "moment";
 
 import dataset from "../../data/dataset.json";
 import coordinates from "./polygons.json";
@@ -21,6 +21,7 @@ export default function Map() {
   const [mouseover, setMouseover] = useState(false);
   const [selectedpoint, setSelectedpoint] = useState();
   const [zoomChanged, setzoomChanged] = useState(5);
+  const [modalisopen, setModalisopen] = useState(false);
 
   useEffect(() => {
     const listener = (e) => {
@@ -48,46 +49,26 @@ export default function Map() {
     getCords();
   }, []);
 
-  function handleInputField(data) {
-    try {
-      const result = dataset.filter(
-        (e) =>
-          e.formatted_name &&
-          e.formatted_name.toLowerCase() === data.inputfield.toLowerCase()
-      );
-      if (result) {
-        setFieldpressed(true);
-        if (!isMobile) {
-          setzoomChanged(13);
-          setTimeout(() => {
-            setzoomChanged(15);
-          }, 500);
-        } else {
-          setzoomChanged(15);
-        }
-        setElem({
-          lat: result[0].location.coordinates[0],
-          lng: result[0].location.coordinates[1],
-        });
-      }
-    } catch (error) {
-      console.log(error);
+  function isopened(selectedpoint) {
+    var format = "hh:mm";
+    var time = moment();
+    var beforetime = moment(selectedpoint.open_time, format);
+    var aftertime = moment(selectedpoint.close_time, format);
+
+    if (time.isBetween(beforetime, aftertime)) {
+      return "aberto";
+    } else {
+      return "fechado";
     }
   }
-  function isopened(selectedpoint) {
-    var format = 'hh:mm'
-      var time = moment();
-      var beforetime = moment(selectedpoint.open_time, format);
-      var aftertime = moment(selectedpoint.close_time, format);
-
-      if(time.isBetween(beforetime, aftertime)) {
-          return "aberto"
-      } else {
-          return "fechado"
-      }
+  function handleCloseModal(data) {
+    setModalisopen(false);
   }
   return (
     <>
+      {modalisopen ? (
+        <Modal point={selectedpoint} onClick={handleCloseModal} />
+      ) : null}
       <GoogleMap
         streetViewControl={false}
         defaultZoom={2}
@@ -153,13 +134,13 @@ export default function Map() {
           >
             <div
               onClick={() => {
-                alert("click");
+                setModalisopen(true);
               }}
               className="box-info"
             >
               <h3>{selectedpoint.name}</h3>
-            <span>Avaliação: {selectedpoint.rating}⋆</span>
-            <strong>{isopened(selectedpoint)}</strong>
+              <span>Avaliação: {selectedpoint.rating}⋆</span>
+              <strong>{isopened(selectedpoint)}</strong>
               <div className="box-content"></div>
             </div>
           </InfoWindow>
