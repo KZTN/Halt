@@ -5,9 +5,9 @@ import styles from "./GoogleMapStyles.json";
 import "./styles.scss";
 import Modal from "../Modal";
 import moment from "moment";
-
 import dataset from "../../data/dataset.json";
 import coordinates from "./polygons.json";
+import api from '../../services/mongodb';
 let Arrcoordinates = coordinates[0].geojson.coordinates[0][0];
 let cordArr = [];
 
@@ -22,6 +22,38 @@ export default function Map() {
   const [selectedpoint, setSelectedpoint] = useState();
   const [zoomChanged, setzoomChanged] = useState(5);
   const [modalisopen, setModalisopen] = useState(false);
+  const [user, setUser] = useState(null);
+  const [points, setPoints] = useState([]);
+  const [isloading, setIsloading] = useState(true);
+  async function getUserData() {
+    await api
+      .get(`/users/${localStorage.getItem("id")}`)
+      .then((response) => {
+        setUser(response.data[0]);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }
+  async function getLocationData() {
+    await api
+      .get(`/locations/`)
+      .then((response) => {
+        setPoints(response.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }
+  useEffect(() => {
+    getUserData();
+    getLocationData();
+  }, []);
+  useEffect(() => {
+    if(user!== null && points.length !== 0) {
+      setIsloading(false);
+    }
+  }, [user, points.length]);
 
   useEffect(() => {
     const listener = (e) => {
@@ -61,13 +93,20 @@ export default function Map() {
       return "fechado";
     }
   }
-  function handleCloseModal(data) {
+  function handleCloseModal() {
     setModalisopen(false);
+    setSelectedpoint(null);
+    setMouseover(false);
+  }
+  async function handleRefreshMap(data) {
+    if(data) {
+      getUserData();
+    }
   }
   return (
     <>
       {modalisopen ? (
-        <Modal point={selectedpoint} onClick={handleCloseModal} />
+        <Modal point={selectedpoint} onClick={handleCloseModal} user={user} onChange={handleRefreshMap} />
       ) : null}
       <GoogleMap
         streetViewControl={false}
@@ -93,10 +132,10 @@ export default function Map() {
             fillOpacity: 0.35,
           }}
         />
-        {dataset[0].map((point) => (
+        {points.map((point) => (
           <Marker
-            icon={
-              point.fav
+            icon={isloading? null:
+              (user.favorites.filter((e) => e!==null? e._id === point._id:null)).length !== 0
                 ? {
                     url: require("./fav_pin.png"),
                     scaledSize: new window.google.maps.Size(40, 40),

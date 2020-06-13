@@ -9,63 +9,55 @@ import VeganSeal from "../../assets/vegan_seal.png";
 import WifiSeal from "../../assets/wifi_seal.png";
 import WomanSeal from "../../assets/woman_seal.png";
 
-export default function Modal({ point, onClick }) {
+export default function Modal({ point, onClick, user, onChange }) {
   const [isfavorite, setIsfavorite] = useState(false);
-  const [user, setUser] = useState(false);
+  const [favchanged, setFavchanged] = useState(false);
+  const [comment, setComment] = useState("");
+  const [rate, setRate] = useState();
   useEffect(() => {
-    async function getData() {
-      await api
-        .get(`users/${localStorage.getItem("id")}`)
-        .then((response) => {
-          setUser(response.data);
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-    }
-    getData();
-  }, []);
-  /*   async function handleFavorite() {
+    user.favorites.map((favitem) => {
+      if (favitem !== null) {
+        if (favitem._id === point._id) {
+          setIsfavorite(true);
+        }
+      }
+    });
+  }, [point._id, user.favorites]);
+
+  async function handleFavorite() {
     if (!isfavorite) {
-      console.log('recebi a ordem de adicionar');
       await api
-        .put(`/favorites/${voucher._id}`, null, {
-          headers: { Authorization: `Bearer ${cookies.token}` },
-        })
+        .post("/favorite", { _id: user._id, favorite_id: point._id })
         .then(() => {
-          if (isfavorite) {
-            setIsfavorite(false);
-          } else {
-            setIsfavorite(true);
-          }
+          alert("Adicionado a sua lista de favoritos");
+          setIsfavorite(true);
+          setFavchanged(true);
         })
         .catch((error) => {
           console.log(error);
         });
     } else {
-      console.log('recebi a ordem de deletar');
       await api
-        .delete(`/favorites/${voucher._id}`, {
-          headers: { Authorization: `Bearer ${cookies.token}` },
-        })
+        .put("/favorite", { _id: user._id, favorite_id: point._id })
         .then(() => {
-          if (isfavorite) {
-            setIsfavorite(false);
-          } else {
-            setIsfavorite(true);
-          }
+          alert("Removido da sua lista de favoritos");
+          setIsfavorite(false);
+          setFavchanged(true);
         })
         .catch((error) => {
           console.log(error);
         });
     }
-  } */
+  }
 
   function popupWPP() {
-    window.open(`https://wa.me/55${point.phone}`, "_top");
+    window.open(`https://wa.me/${point.phone}`, "_top");
   }
   async function handleCloseModal() {
     await onClick({});
+    if (favchanged) {
+      await onChange(true);
+    }
   }
   useEffect(() => {
     const listener = (e) => {
@@ -79,6 +71,15 @@ export default function Modal({ point, onClick }) {
       window.removeEventListener("keydown", listener);
     };
   }, [handleCloseModal]);
+
+  async function handleSubmit(e) {
+    e.preventDefault();
+    await api.post('/comment', {location_id: point._id, author: user._id, comment: comment, rate: rate}).then(() => {
+      alert('Comentário enviado com sucesso');
+    }).catch((error) => {
+      console.log(error);
+    })
+  }
   return (
     <div className="modal">
       <div className="content">
@@ -93,17 +94,23 @@ export default function Modal({ point, onClick }) {
             <img src={point.thumbnail} />
           </div>
           <div className="box-main-details">
-            <h1>
+            <h1 style={{ marginBottom: 20 }}>
               <strong>{point.name}</strong>
             </h1>
-            <div className="box-main-item">
+            <div className="box-main-item" style={{ marginBottom: 2 }}>
+              <h3>Estadia: R${point.value}</h3>
+            </div>
+            <div className="box-main-item" style={{ marginBottom: 2 }}>
               <h3>
                 Avaliação: {point.rating}
                 <FaStar size={12} color="#222" style={{ marginBottom: 1 }} />
               </h3>
             </div>
-            <div className="box-main-item">
-              <h3>Estadia: R${point.value}</h3>
+            <div className="box-main-item" style={{ marginBottom: 10 }}>
+              <h5>
+                Horário de funcionamento: {point.open_time} às
+                {point.close_time}
+              </h5>
             </div>
             <div className="box-wrapper-seals">
               {point.woman_seal ? (
@@ -136,7 +143,7 @@ export default function Modal({ point, onClick }) {
               <FaWhatsapp size={24} color="#fff" style={{ marginRight: 5 }} />
               <span>Entre em contato</span>
             </div>
-            <div className="favorites" /* onClick={handleFavorite} */>
+            <div className="favorites" onClick={handleFavorite}>
               <FiHeart size={24} color="#666" />
               {!isfavorite ? (
                 <span>Adicionar a sua lista de favoritos</span>
@@ -144,10 +151,50 @@ export default function Modal({ point, onClick }) {
                 <span>Remover da sua lista de favoritos</span>
               )}
             </div>
+            <div className="comments">
+              <h1>Comentários:</h1>
+              {point.comments.map((e) => (
+                <div className="comment">
+                  <div className="comment-header">
+                    <div className="comment-author">
+                      <img src={e.author.thumbnail} alt="" />
+                      <span>{e.author.name}</span>
+                    </div>
+                    <div className="comment-rating">
+                      <span>{e.rate}</span>
+                      <FaStar
+                        size={12}
+                        color="#222"
+                        style={{ marginBottom: 1 }}
+                      />
+                    </div>
+                  </div>
+
+                  <div className="comment-body">
+                    <span>{e.comment}</span>
+                  </div>
+                </div>
+              ))}
+            </div>
+            <div className="make-comment">
+              <h1>faça um comentário:</h1>
+              <form onSubmit={handleSubmit}>
+                <textarea
+                  name=""
+                  id=""
+                  cols="30"
+                  rows="10"
+                  value={comment}
+                  onChange={(e) => setComment(e.target.value)}
+                  placeholder="Descreva em detalhes o que achou deste estabelecimento."
+                ></textarea>
+                <div className="wrap">
+                  <input type="number" placeholder="nota" min="1" max="5" value={rate} onChange={(e) => setRate(e.target.value)}/>
+                  <button type="submit">Enviar</button>
+                </div>
+              </form>
+            </div>
           </div>
-        </div>
-        <div className="box-info">
-          <div className="description"></div>
         </div>
       </div>
     </div>
