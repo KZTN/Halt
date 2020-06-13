@@ -74,11 +74,19 @@ export default function Modal({ point, onClick, user, onChange }) {
 
   async function handleSubmit(e) {
     e.preventDefault();
-    await api.post('/comment', {location_id: point._id, author: user._id, comment: comment, rate: rate}).then(() => {
-      alert('Comentário enviado com sucesso');
-    }).catch((error) => {
-      console.log(error);
-    })
+    await api
+      .post("/comment", {
+        location_id: point._id,
+        author: user._id,
+        comment: comment,
+        rate: rate,
+      })
+      .then(() => {
+        alert("Comentário enviado com sucesso");
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   }
   return (
     <div className="modal">
@@ -157,7 +165,14 @@ export default function Modal({ point, onClick, user, onChange }) {
                 <div className="comment">
                   <div className="comment-header">
                     <div className="comment-author">
-                      <img src={e.author.thumbnail} alt="" />
+                      {e.thumbnail ? (
+                        <img src={e.author.thumbnail} alt="" />
+                      ) : (
+                        <img
+                          src="https://media.discordapp.net/attachments/697512026251067472/711345678885847140/user-solid.png"
+                          alt=""
+                        />
+                      )}
                       <span>{e.author.name}</span>
                     </div>
                     <div className="comment-rating">
@@ -189,7 +204,14 @@ export default function Modal({ point, onClick, user, onChange }) {
                   placeholder="Descreva em detalhes o que achou deste estabelecimento."
                 ></textarea>
                 <div className="wrap">
-                  <input type="number" placeholder="nota" min="1" max="5" value={rate} onChange={(e) => setRate(e.target.value)}/>
+                  <input
+                    type="number"
+                    placeholder="nota"
+                    min="1"
+                    max="5"
+                    value={rate}
+                    onChange={(e) => setRate(e.target.value)}
+                  />
                   <button type="submit">Enviar</button>
                 </div>
               </form>
