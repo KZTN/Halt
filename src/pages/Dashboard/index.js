@@ -12,7 +12,7 @@ export default function Dashboard({history}) {
   }, [history]);
   return (
     <>
-      <Nav />
+      <Nav history={history}/>
       <section id="dashboard">
         <div className="map">
           <MapWrapped
