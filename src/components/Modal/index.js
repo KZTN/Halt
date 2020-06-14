@@ -63,7 +63,7 @@ export default function Modal({ point, onClick, user, onChange }) {
       await onChange(true);
     }
   }
-  useEffect(() => {
+/*   useEffect(() => {
     const listener = (e) => {
       if (e.key === "Escape") {
         handleCloseModal();
@@ -75,7 +75,7 @@ export default function Modal({ point, onClick, user, onChange }) {
       window.removeEventListener("keydown", listener);
     };
   }, [handleCloseModal]);
-
+ */
   async function handleSubmit(e) {
     e.preventDefault();
     await api
