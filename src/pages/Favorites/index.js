@@ -54,11 +54,11 @@ export default function Favorites({ history }) {
               <div className="wrapper">
                 <h1>Halt</h1>
                 <span>contato</span>
-              </div>
                 <div className="wrapper-actions">
                   <Link to="/dashboard">Ver mapa</Link>
                   <Link to="/profile">Ver perfil</Link>
                 </div>
+              </div>
             </div>
             <header>
               <h1>Seus pontos favoritos</h1>

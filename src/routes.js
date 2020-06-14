@@ -20,6 +20,7 @@ export default function Routes() {
         <Route path="/dashboard" component={Dashboard} />
         <Route path="/profile" exact component={Profile} />
         <Route path="/profile/credentials" component={Credentials} />
+        <Route path="/favorites" exact component={Favorites} />
         <Route path="/about" exact component={About} />
       </Switch>
     </BrowserRouter>
