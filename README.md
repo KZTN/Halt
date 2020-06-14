@@ -24,3 +24,7 @@ Encontre as melhores paradas de pernoite e alimentação para você e seu caminh
 <p align="center">
   <img alt="Estimulo" src=".github/Halt_showcase.png" width="100%">
 </p>
+
+## 💻 Projeto
+
+O Estimulo é um projeto que visa conectar caminhoneiros a pontos de locação e pousada com o âmbito de promoter o bem estar social e de vida dos seus usuários.
