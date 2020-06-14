@@ -58,22 +58,22 @@ export default function Profile({ history }) {
             <div className="box-actions">
               <Link to="/credentials">
                 <div className="box-item">
-                  <FaPen color="#000" size={48} />
+                  <FaPen color="#ddd" size={48} />
                   <span>Meus dados</span>
                 </div>
               </Link>
               <Link to="/dashboard">
                 <div className="box-item">
-                  <FaMap color="#000" size={48} />
+                  <FaMap color="#ddd" size={48} />
                   <span>Ver mapa</span>
                 </div>
               </Link>
               <div className="box-item">
-                <FaInfo color="#000" size={48} />
+                <FaInfo color="#ddd" size={48} />
                 <span>Informações do app</span>
               </div>
               <div className="box-item" onClick={handlelogout}>
-                <FiLogOut color="#000" size={48} />
+                <FiLogOut color="#ddd" size={48} />
                 <span>Sair</span>
               </div>
             </div>
