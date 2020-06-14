@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import api from "../../services/mongodb";
 import Modal from "../../components/Modal";
+import moment from 'moment';
 import { Link } from "react-router-dom";
 import "./styles.scss";
 export default function Favorites({ history }) {
@@ -30,9 +31,6 @@ export default function Favorites({ history }) {
       history.push("/login");
     }
   });
-  function isOpen() {
-    return "Aberto!";
-  }
   function handleclick(favitem) {
     setSelectedpoint(favitem);
     setModalisopen(true);
@@ -41,7 +39,18 @@ export default function Favorites({ history }) {
     setModalisopen(false);
     setSelectedpoint(null);
   }
+  function isOpen(favitem) {
+    var format = "hh:mm";
+    var time = moment();
+    var beforetime = moment(favitem.open_time, format);
+    var aftertime = moment(favitem.close_time, format);
 
+    if (time.isBetween(beforetime, aftertime)) {
+      return "Aberto!";
+    } else {
+      return "Fechado";
+    }
+  }
   return (
     <>
       {modalisopen ? (
@@ -79,7 +88,7 @@ export default function Favorites({ history }) {
                       <span>{favitem.rating}</span>
                     </div>
                     <div className="wrapper-content">
-                      <span>{isOpen()}</span>
+                      <span>{isOpen(favitem)}</span>
                       <span>
                         {favitem.address.length > 25
                           ? favitem.address.slice(0, 25) + "..."
