@@ -169,8 +169,8 @@ export default function Map({ history }) {
             scaledSize: new window.google.maps.Size(60, 60),
           }}
           position={{
-            lat: -23.4031863,
-            lng: -46.3296255,
+            lat: elem.lat,
+            lng: elem.lng,
           }}
         />
         {points.map((point) => (
