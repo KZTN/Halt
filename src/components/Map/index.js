@@ -110,10 +110,10 @@ export default function Map() {
       ) : null}
       <GoogleMap
         streetViewControl={false}
-        defaultZoom={15}
+        defaultZoom={14}
         defaultCenter={{ lat: -23.4026363, lng: -46.3296255 }}
         center={{ lat: elem.lat, lng: elem.lng }}
-        zoom={fieldpressed ? zoomChanged : 15}
+        zoom={fieldpressed ? zoomChanged : 14}
         onZoomChanged={() => setFieldpressed(false)}
         defaultOptions={{
           styles: styles,

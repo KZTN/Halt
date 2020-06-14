@@ -5,6 +5,7 @@ import {
   FaHeart,
   FaQuestionCircle,
   FaInfoCircle,
+  FaSearch
 } from "react-icons/fa";
 import {FiLogOut} from 'react-icons/fi'
 import { Squash as Hamburger } from "hamburger-react";
@@ -31,6 +32,10 @@ export default function Nav({history}) {
             <img src={Logo} alt="" />
             <h1>Halt</h1>
           </div>
+          <form action="">
+            <FaSearch color="#666" size={14} />
+            <input type="text" placeholder="Busque por pontos, cidades, rotas..."/>
+          </form>
           <button onClick={toggleNavMenu}>
             <Hamburger toggled={isvisible} toggle={setIsvisible} />{" "}
           </button>

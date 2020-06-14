@@ -42,7 +42,21 @@ section#nav .content nav button {
   border: 0;
   background: transparent;
 }
-
+section#nav .content form {
+  background: rgba(0, 0, 0, 0.05);
+  box-shadow: 0 0.0625rem 0.125rem 0 rgba(0, 0, 0, 0.15);
+  border-radius: 8px;
+  padding: 0.7rem 0.5rem;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+section#nav .content form input {
+  margin-top: 2px;
+  margin-left: 5px;
+  background: transparent;
+  border: 0;
+}
 section#nav .content ul.side-nav-visible {
   padding: 2rem 0 0 0;
   margin-left: auto;
