@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import api from "../../services/mongodb";
-import {FaArrowLeft} from 'react-icons/fa'
-import {Link} from 'react-router-dom'
+import { FaArrowLeft } from "react-icons/fa";
+import { Link } from "react-router-dom";
 import "./styles.scss";
 import Input from "react-phone-number-input/input";
 
@@ -13,26 +13,35 @@ export default function Credentials({ history }) {
 
   const [user, setUser] = useState();
   const [isloading, setIsloading] = useState(true);
+  async function getUserData() {
+    await api
+      .get(`/users/${localStorage.getItem("id")}`)
+      .then((response) => {
+        setUser(response.data[0]);
+        setIsloading(false);
+      })
+      .catch((error) => {
+        console.log(error);
+        setIsloading(false);
+      });
+  }
   useEffect(() => {
-    async function getUserData() {
-      await api
-        .get(`/users/${localStorage.getItem("id")}`)
-        .then((response) => {
-          setUser(response.data[0]);
-          setIsloading(false);
-        })
-        .catch((error) => {
-          console.log(error);
-          setIsloading(false);
-        });
-    }
     if (localStorage.getItem("id") && isloading === true) {
       getUserData();
     } else if (!localStorage.getItem("id")) {
       history.push("/login");
     }
   });
-
+  async function handleSubmit(e) {
+    e.preventDefault();
+    await api.put(`/users/${localStorage.getItem("id")}`, { phone: phonefield, name: namefield, thumbnail: thumbnailfield, password: passwordfield}).then(() =>{
+        alert('Dados atualizados com sucesso!');
+        getUserData();
+    }).catch((error) => {
+        alert('Erro. Revise seus dados');
+        console.log(error)
+    })
+  }
   return (
     <>
       {isloading ? null : (
@@ -58,9 +67,13 @@ export default function Credentials({ history }) {
               </div>
             </div>
             <div className="box-actions">
-                <Link to="/profile"><button><FaArrowLeft color="#333" size={24}/> </button></Link>
+              <Link to="/profile">
+                <button>
+                  <FaArrowLeft color="#333" size={24} />{" "}
+                </button>
+              </Link>
             </div>
-            <form action="">
+            <form onSubmit={handleSubmit}>
               <div className="card-credentials">
                 <div className="card-item">
                   <label htmlFor="thumbnail">Envie um link com sua foto</label>
