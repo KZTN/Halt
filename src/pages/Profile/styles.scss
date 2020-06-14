@@ -1,0 +1,71 @@
+section#profile {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+section#profile .content .header {
+  height: 200px;
+  display: block;
+  background: var(--common-green);
+}
+
+section#profile .content .header .wrapper {
+  padding: 1rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+section#profile .content .me {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+}
+
+section#profile .content .me img {
+  margin: 0 auto;
+  border-radius: 50%;
+  width: 180px;
+  margin-top: -100px;
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.5);
+
+  margin-bottom: 10px;
+}
+
+section#profile .content .me .greetings {
+  font-size: 20px;
+}
+
+section#profile .content .box-actions {
+  width: 80%;
+  margin: 0 auto;
+  margin-top: 20px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  padding: 0 2rem;
+}
+
+section#profile .content .box-actions .box-item {
+  height: 136px;
+  width: 136px;
+  border-radius: 8px;
+  background: #f5f5f2;
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px;
+  padding: 1rem;
+  text-align: center;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+  cursor: pointer;
+  & * {
+    margin-bottom: 10px;
+  }
+}
