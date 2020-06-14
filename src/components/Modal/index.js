@@ -13,6 +13,7 @@ export default function Modal({ point, onClick, user, onChange }) {
   const [isfavorite, setIsfavorite] = useState(false);
   const [favchanged, setFavchanged] = useState(false);
   const [comment, setComment] = useState("");
+  const [comments, setComments] = useState([]);
   const [rate, setRate] = useState();
   useEffect(() => {
     user.favorites.map((favitem) => {
@@ -23,6 +24,9 @@ export default function Modal({ point, onClick, user, onChange }) {
       }
     });
   }, [point._id, user.favorites]);
+  useEffect(() => {
+    setComments(point.comments);
+  }, [point.comments, user.favorites]);
 
   async function handleFavorite() {
     if (!isfavorite) {
@@ -81,7 +85,9 @@ export default function Modal({ point, onClick, user, onChange }) {
         comment: comment,
         rate: rate,
       })
-      .then(() => {
+      .then((response) => {
+        console.log(response.data);
+        setComments(response.data[0].comments);
         alert("Comentário enviado com sucesso");
       })
       .catch((error) => {
@@ -165,7 +171,7 @@ export default function Modal({ point, onClick, user, onChange }) {
             </div>
             <div className="comments">
               <h1>Comentários:</h1>
-              {point.comments.map((e) => (
+              {comments.map((e) => (
                 <div className="comment">
                   <div className="comment-header">
                     <div className="comment-author">
