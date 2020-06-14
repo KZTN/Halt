@@ -75,7 +75,7 @@ async function handlesubmit(e) {
               Como dar um feedback?
             </li>
           </Link>
-          <Link to="/profile">
+          <Link to="/about">
             <li className="nav-item">
               <FaInfoCircle size={48} color="#f9f4f0" />
               Sobre o app
