@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { GoogleMap, Marker, InfoWindow, Polygon } from "react-google-maps";
-import { isMobile } from "react-device-detect";
 import styles from "./GoogleMapStyles.json";
 import "./styles.scss";
 import Modal from "../Modal";
@@ -19,14 +18,42 @@ Arrcoordinates.map((coordinate) =>
 console.log(dataset);
 export default function Map({ history }) {
   const [elem, setElem] = useState({ lat: -23.4026363, lng: -46.3296255 });
-  const [fieldpressed, setFieldpressed] = useState(false);
-  const [mouseover, setMouseover] = useState(false);
   const [selectedpoint, setSelectedpoint] = useState();
   const [zoomChanged, setzoomChanged] = useState(14);
   const [modalisopen, setModalisopen] = useState(false);
   const [user, setUser] = useState(null);
   const [points, setPoints] = useState([]);
   const [isloading, setIsloading] = useState(true);
+
+  async function getCords() {
+    const apigeolocation = await fetch(
+      "https://location.services.mozilla.com/v1/geolocate?key=test"
+    ).then((el) => el.json());
+    setElem({
+      lat: apigeolocation.location.lat,
+      lng: apigeolocation.location.lng,
+    });
+  }
+
+  useEffect(() => {
+    navigator.geolocation.getCurrentPosition(
+      () => {
+        getCords();
+      },
+      (err) => {
+        console.log(err);
+        if (err.code === 2) {
+          getCords();
+        }
+      },
+      {
+        enableHighAccuracy: true,
+        timeout: 20000,
+        maximumAge: 1000,
+      }
+    );
+  }, []);
+
   async function getUserData() {
     await api
       .get(`/users/${localStorage.getItem("id")}`)
@@ -85,7 +112,6 @@ export default function Map({ history }) {
   function handleCloseModal() {
     setModalisopen(false);
     setSelectedpoint(null);
-    setMouseover(false);
   }
   async function handleRefreshMap(data) {
     if (data) {
@@ -93,16 +119,16 @@ export default function Map({ history }) {
     }
   }
   function handleInputField(data) {
-          setzoomChanged(12);
-          setTimeout(() => {
-            setzoomChanged(14);
-          }, 500);
-        setElem({
-          lat: data.location.coordinates[0],
-          lng: data.location.coordinates[1],
-        });
-      }
-  
+    setzoomChanged(12);
+    setTimeout(() => {
+      setzoomChanged(14);
+    }, 500);
+    setElem({
+      lat: data.location.coordinates[0],
+      lng: data.location.coordinates[1],
+    });
+  }
+
   return (
     <>
       <Nav onSubmit={handleInputField} />
@@ -120,7 +146,6 @@ export default function Map({ history }) {
         defaultCenter={{ lat: -23.4026363, lng: -46.3296255 }}
         center={{ lat: elem.lat, lng: elem.lng }}
         zoom={zoomChanged}
-        onZoomChanged={() => setFieldpressed(false)}
         defaultOptions={{
           styles: styles,
           mapTypeControl: false,
@@ -172,7 +197,6 @@ export default function Map({ history }) {
             }}
             onClick={() => {
               setSelectedpoint(point);
-              setMouseover(true);
               setElem({
                 lat: point.location.coordinates[0],
                 lng: point.location.coordinates[1],
@@ -184,7 +208,6 @@ export default function Map({ history }) {
           <InfoWindow
             onCloseClick={() => {
               setSelectedpoint(null);
-              setMouseover(false);
             }}
             position={{
               lat: selectedpoint.location.coordinates[0],

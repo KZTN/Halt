@@ -23,6 +23,8 @@ async function handlesubmit(e) {
       await onSubmit(
         response.data[0]
       );
+    } else {
+      alert('Não achamos nada nessa região');
     }
   }).catch((error) => {
     console.log(error);
