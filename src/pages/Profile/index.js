@@ -56,7 +56,7 @@ export default function Profile({ history }) {
               </div>
             </div>
             <div className="box-actions">
-              <Link to="/credentials">
+              <Link to="/profile/credentials">
                 <div className="box-item">
                   <FaPen color="#ddd" size={48} />
                   <span>Meus dados</span>
