@@ -27,4 +27,4 @@ Encontre as melhores paradas de pernoite e alimentação para você e seu caminh
 
 ## 💻 Projeto
 
-O Estimulo é um projeto que visa conectar caminhoneiros a pontos de locação e pousada com o âmbito de promoter o bem estar social e de vida dos seus usuários.
+O Halt é uma plataforma que visa conectar caminhoneiros a pontos de locação e pousada com o âmbito de promoter o bem estar social e de vida dos seus usuários.
