@@ -1,7 +1,7 @@
 <p align="center">
     <a href="https://halt-app.herokuapp.com/"><img alt="Halt" title="#app" src=".github/logo.png" width="250px" /><a/>
 </p>
-    <h1 align="center">Estímulo</h1>
+    <h1 align="center">Halt</h1>
 
 <h4 align="center">
 Encontre as melhores paradas de pernoite e alimentação para você e seu caminhão.
