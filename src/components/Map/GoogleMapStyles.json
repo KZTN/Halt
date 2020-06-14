@@ -81,7 +81,7 @@
     "featureType": "poi.business",
     "stylers": [
       {
-        "visibility": "on"
+        "visibility": "off"
       }
     ]
   },

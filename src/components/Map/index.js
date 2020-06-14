@@ -16,7 +16,7 @@ Arrcoordinates.map((coordinate) =>
 );
 console.log(dataset);
 export default function Map() {
-  const [elem, setElem] = useState({ lat: -23.46278, lng: -46.53333 });
+  const [elem, setElem] = useState({ lat: -23.4026363, lng: -46.3296255 });
   const [fieldpressed, setFieldpressed] = useState(false);
   const [mouseover, setMouseover] = useState(false);
   const [selectedpoint, setSelectedpoint] = useState();
@@ -68,7 +68,7 @@ export default function Map() {
     };
   }, []);
 
-  useEffect(() => {
+/*   useEffect(() => {
     async function getCords() {
       const apigeolocation = await fetch(
         "https://location.services.mozilla.com/v1/geolocate?key=test"
@@ -79,7 +79,7 @@ export default function Map() {
       });
     }
     getCords();
-  }, []);
+  }, []); */
 
   function isopened(selectedpoint) {
     var format = "hh:mm";
@@ -110,10 +110,10 @@ export default function Map() {
       ) : null}
       <GoogleMap
         streetViewControl={false}
-        defaultZoom={2}
-        defaultCenter={{ lat: elem.lat, lng: elem.lng }}
+        defaultZoom={15}
+        defaultCenter={{ lat: -23.4026363, lng: -46.3296255 }}
         center={{ lat: elem.lat, lng: elem.lng }}
-        zoom={fieldpressed ? zoomChanged : 2}
+        zoom={fieldpressed ? zoomChanged : 15}
         onZoomChanged={() => setFieldpressed(false)}
         defaultOptions={{
           styles: styles,
@@ -132,6 +132,18 @@ export default function Map() {
             fillOpacity: 0.35,
           }}
         />
+                  <Marker
+            icon={{
+                    url: require("./pin_me.png"),
+                    scaledSize: new window.google.maps.Size(60, 60),
+                  }
+               
+            }
+            position={{
+              lat: -23.4031863,
+              lng: -46.3296255,
+            }}
+          />
         {points.map((point) => (
           <Marker
             icon={isloading? null:
