@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import api from "../../services/mongodb";
 import Modal from "../../components/Modal";
-import moment from 'moment';
+import moment from "moment";
 import { Link } from "react-router-dom";
 import "./styles.scss";
 export default function Favorites({ history }) {
@@ -63,10 +63,10 @@ export default function Favorites({ history }) {
               <div className="wrapper">
                 <h1>Halt</h1>
                 <span>contato</span>
-                <div className="wrapper-actions">
-                  <Link to="/dashboard">Ver mapa</Link>
-                  <Link to="/profile">Ver perfil</Link>
-                </div>
+              </div>
+              <div className="wrapper-actions">
+                <Link to="/dashboard">Ver mapa</Link>
+                <Link to="/profile">Ver perfil</Link>
               </div>
             </div>
             <header>
