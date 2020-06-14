@@ -1,5 +1,5 @@
 <p align="center">
-    <a href="https://halt-app.herokuapp.com/"><img alt="Halt" title="#app" src=".github/logo.pong" width="250px" /><a/>
+    <a href="https://halt-app.herokuapp.com/"><img alt="Halt" title="#app" src=".github/logo.png" width="250px" /><a/>
 </p>
     <h1 align="center">Estímulo</h1>
 
