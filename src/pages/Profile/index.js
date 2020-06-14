@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
-import { FaPen, FaMap, FaInfo } from "react-icons/fa";
-import {Link} from 'react-router-dom'
-import {FiLogOut} from 'react-icons/fi'
+import { FaPen, FaMap, FaHeart } from "react-icons/fa";
+import { Link } from "react-router-dom";
+import { FiLogOut } from "react-icons/fi";
 
 import api from "../../services/mongodb";
 import "./styles.scss";
@@ -29,7 +29,7 @@ export default function Profile({ history }) {
   });
   function handlelogout() {
     localStorage.removeItem("id");
-    history.push("/")
+    history.push("/");
   }
   return (
     <>
@@ -59,19 +59,21 @@ export default function Profile({ history }) {
               <Link to="/profile/credentials">
                 <div className="box-item">
                   <FaPen color="#ddd" size={48} />
-                  <span>Meus dados</span>
+                  <span>Meus Dados</span>
                 </div>
               </Link>
               <Link to="/dashboard">
                 <div className="box-item">
                   <FaMap color="#ddd" size={48} />
-                  <span>Ver mapa</span>
+                  <span>Ver Mapa</span>
                 </div>
               </Link>
-              <div className="box-item">
-                <FaInfo color="#ddd" size={48} />
-                <span>Informações do app</span>
-              </div>
+              <Link to="/favorites">
+                <div className="box-item">
+                  <FaHeart color="#ddd" size={48} />
+                  <span>Meus Favoritos</span>
+                </div>
+              </Link>
               <div className="box-item" onClick={handlelogout}>
                 <FiLogOut color="#ddd" size={48} />
                 <span>Sair</span>

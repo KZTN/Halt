@@ -111,7 +111,7 @@ export default function Modal({ point, onClick, user, onChange }) {
             <div className="box-main-item" style={{ marginBottom: 2 }}>
               <h3>
                 Avaliação: {point.rating}
-                <FaStar size={12} color="#222" style={{ marginBottom: 1 }} />
+                <FaStar size={12} color="#222" style={{ marginBottom: 2 }} />
               </h3>
             </div>
             <div className="box-main-item" style={{ marginBottom: 10 }}>
@@ -119,6 +119,11 @@ export default function Modal({ point, onClick, user, onChange }) {
                 Horário de funcionamento: {point.open_time} às {point.close_time}
               </h5>
             </div>
+            <div className="box-main-item" style={{ marginBottom: 10 }}>
+              <h3>
+                {point.address}
+              </h3>
+              </div>
             <div className="box-wrapper-seals">
               {point.woman_seal ? (
                 <div className="wrapper-item">
@@ -203,6 +208,7 @@ export default function Modal({ point, onClick, user, onChange }) {
                     max="5"
                     value={rate}
                     onChange={(e) => setRate(e.target.value)}
+                    required
                   />
                   <button type="submit">Enviar</button>
                 </div>

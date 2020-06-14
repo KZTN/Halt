@@ -34,7 +34,6 @@ export default function Favorites({ history }) {
     return "Aberto!";
   }
   function handleclick(favitem) {
-    alert("click");
     setSelectedpoint(favitem);
     setModalisopen(true);
   }
@@ -68,7 +67,7 @@ export default function Favorites({ history }) {
               {user.favorites.map((favitem) => (
                 <div
                   className="wrapper-item"
-                  onclick={() => handleclick(favitem)}
+                  onClick={() => handleclick(favitem)}
                   key={favitem._id}
                 >
                   <div className="item-thumbnail">
