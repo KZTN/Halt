@@ -18,6 +18,7 @@ Arrcoordinates.map((coordinate) =>
 console.log(dataset);
 export default function Map({ history }) {
   const [elem, setElem] = useState({ lat: -23.4026363, lng: -46.3296255 });
+  const [me, setMe] = useState({});
   const [selectedpoint, setSelectedpoint] = useState();
   const [zoomChanged, setzoomChanged] = useState(14);
   const [modalisopen, setModalisopen] = useState(false);
@@ -30,6 +31,10 @@ export default function Map({ history }) {
       "https://location.services.mozilla.com/v1/geolocate?key=test"
     ).then((el) => el.json());
     setElem({
+      lat: apigeolocation.location.lat,
+      lng: apigeolocation.location.lng,
+    });
+    setMe({
       lat: apigeolocation.location.lat,
       lng: apigeolocation.location.lng,
     });
@@ -169,8 +174,8 @@ export default function Map({ history }) {
             scaledSize: new window.google.maps.Size(60, 60),
           }}
           position={{
-            lat: elem.lat,
-            lng: elem.lng,
+            lat: me.lat,
+            lng: me.lng,
           }}
         />
         {points.map((point) => (
