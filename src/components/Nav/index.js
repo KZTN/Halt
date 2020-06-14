@@ -7,12 +7,28 @@ import {
   FaInfoCircle,
   FaSearch
 } from "react-icons/fa";
+import api from '../../services/mongodb';
 import {FiLogOut} from 'react-icons/fi'
 import { Squash as Hamburger } from "hamburger-react";
 import { Link } from "react-router-dom";
 import Logo from "../../assets/logo.png";
-export default function Nav({history}) {
+export default function Nav({onSubmit}) {
   const [isvisible, setIsvisible] = useState(false);
+  const [inputfield, setInputfield] = useState("");
+async function handlesubmit(e) {
+  e.preventDefault();
+
+  await api.get(`/search/${inputfield}`).then(async (response) => {
+    if(response.data.length) {
+      await onSubmit(
+        response.data[0]
+      );
+    }
+  }).catch((error) => {
+    console.log(error);
+  });
+  setInputfield("");
+}
   function toggleNavMenu() {
     if (isvisible) {
       setIsvisible(false);
@@ -22,8 +38,8 @@ export default function Nav({history}) {
   }
   function handlelogout() {
     localStorage.removeItem("id");
-    history.push("/")
-  }
+    window.location.href = '/';
+    }
   return (
     <section id="nav">
       <div className="content">
@@ -31,9 +47,9 @@ export default function Nav({history}) {
           <div className="logo">
             <img src={Logo} alt="" />
           </div>
-          <form action="">
+          <form onSubmit={handlesubmit}>
             <FaSearch color="#666" size={14} />
-            <input type="text" placeholder="Busque por pontos, cidades, rotas..."/>
+            <input type="text" value={inputfield} onChange={(e) => setInputfield(e.target.value)} placeholder="Busque por pontos, cidades, rotas..."/>
           </form>
           <button onClick={toggleNavMenu}>
             <Hamburger toggled={isvisible} toggle={setIsvisible} />{" "}

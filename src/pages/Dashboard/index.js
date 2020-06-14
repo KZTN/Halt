@@ -1,7 +1,6 @@
 import React, {useEffect} from "react";
 import { withScriptjs, withGoogleMap } from "react-google-maps";
 import MapContainer from "../../components/Map";
-import Nav from "../../components/Nav";
 import "./styles.scss";
 export default function Dashboard({history}) {
   const MapWrapped = withScriptjs(withGoogleMap(MapContainer));
@@ -12,7 +11,6 @@ export default function Dashboard({history}) {
   }, [history]);
   return (
     <>
-      <Nav history={history}/>
       <section id="dashboard">
         <div className="map">
           <MapWrapped

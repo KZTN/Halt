@@ -4,10 +4,12 @@ import { isMobile } from "react-device-detect";
 import styles from "./GoogleMapStyles.json";
 import "./styles.scss";
 import Modal from "../Modal";
+import Nav from "../Nav";
+
 import moment from "moment";
 import dataset from "../../data/dataset.json";
 import coordinates from "./polygons.json";
-import api from '../../services/mongodb';
+import api from "../../services/mongodb";
 let Arrcoordinates = coordinates[0].geojson.coordinates[0][0];
 let cordArr = [];
 
@@ -15,12 +17,12 @@ Arrcoordinates.map((coordinate) =>
   cordArr.push({ lat: coordinate[1], lng: coordinate[0] })
 );
 console.log(dataset);
-export default function Map() {
+export default function Map({ history }) {
   const [elem, setElem] = useState({ lat: -23.4026363, lng: -46.3296255 });
   const [fieldpressed, setFieldpressed] = useState(false);
   const [mouseover, setMouseover] = useState(false);
   const [selectedpoint, setSelectedpoint] = useState();
-  const [zoomChanged, setzoomChanged] = useState(5);
+  const [zoomChanged, setzoomChanged] = useState(14);
   const [modalisopen, setModalisopen] = useState(false);
   const [user, setUser] = useState(null);
   const [points, setPoints] = useState([]);
@@ -50,7 +52,7 @@ export default function Map() {
     getLocationData();
   }, []);
   useEffect(() => {
-    if(user!== null && points.length !== 0) {
+    if (user !== null && points.length !== 0) {
       setIsloading(false);
     }
   }, [user, points.length]);
@@ -67,19 +69,6 @@ export default function Map() {
       window.removeEventListener("keydown", listener);
     };
   }, []);
-
-/*   useEffect(() => {
-    async function getCords() {
-      const apigeolocation = await fetch(
-        "https://location.services.mozilla.com/v1/geolocate?key=test"
-      ).then((el) => el.json());
-      setElem({
-        lat: apigeolocation.location.lat,
-        lng: apigeolocation.location.lng,
-      });
-    }
-    getCords();
-  }, []); */
 
   function isopened(selectedpoint) {
     var format = "hh:mm";
@@ -99,21 +88,38 @@ export default function Map() {
     setMouseover(false);
   }
   async function handleRefreshMap(data) {
-    if(data) {
+    if (data) {
       getUserData();
     }
   }
+  function handleInputField(data) {
+          setzoomChanged(12);
+          setTimeout(() => {
+            setzoomChanged(14);
+          }, 500);
+        setElem({
+          lat: data.location.coordinates[0],
+          lng: data.location.coordinates[1],
+        });
+      }
+  
   return (
     <>
+      <Nav onSubmit={handleInputField} />
       {modalisopen ? (
-        <Modal point={selectedpoint} onClick={handleCloseModal} user={user} onChange={handleRefreshMap} />
+        <Modal
+          point={selectedpoint}
+          onClick={handleCloseModal}
+          user={user}
+          onChange={handleRefreshMap}
+        />
       ) : null}
       <GoogleMap
         streetViewControl={false}
         defaultZoom={14}
         defaultCenter={{ lat: -23.4026363, lng: -46.3296255 }}
         center={{ lat: elem.lat, lng: elem.lng }}
-        zoom={fieldpressed ? zoomChanged : 14}
+        zoom={zoomChanged}
         onZoomChanged={() => setFieldpressed(false)}
         defaultOptions={{
           styles: styles,
@@ -132,22 +138,24 @@ export default function Map() {
             fillOpacity: 0.35,
           }}
         />
-                  <Marker
-            icon={{
-                    url: require("./pin_me.png"),
-                    scaledSize: new window.google.maps.Size(60, 60),
-                  }
-               
-            }
-            position={{
-              lat: -23.4031863,
-              lng: -46.3296255,
-            }}
-          />
+        <Marker
+          icon={{
+            url: require("./pin_me.png"),
+            scaledSize: new window.google.maps.Size(60, 60),
+          }}
+          position={{
+            lat: -23.4031863,
+            lng: -46.3296255,
+          }}
+        />
         {points.map((point) => (
           <Marker
-            icon={isloading? null:
-              (user.favorites.filter((e) => e!==null? e._id === point._id:null)).length !== 0
+            icon={
+              isloading
+                ? null
+                : user.favorites.filter((e) =>
+                    e !== null ? e._id === point._id : null
+                  ).length !== 0
                 ? {
                     url: require("./fav_pin.png"),
                     scaledSize: new window.google.maps.Size(40, 40),
