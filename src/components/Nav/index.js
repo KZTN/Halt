@@ -30,7 +30,6 @@ export default function Nav({history}) {
         <nav>
           <div className="logo">
             <img src={Logo} alt="" />
-            <h1>Halt</h1>
           </div>
           <form action="">
             <FaSearch color="#666" size={14} />
