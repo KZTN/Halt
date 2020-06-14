@@ -116,8 +116,7 @@ export default function Modal({ point, onClick, user, onChange }) {
             </div>
             <div className="box-main-item" style={{ marginBottom: 10 }}>
               <h5>
-                Horário de funcionamento: {point.open_time} às
-                {point.close_time}
+                Horário de funcionamento: {point.open_time} às {point.close_time}
               </h5>
             </div>
             <div className="box-wrapper-seals">
@@ -165,14 +164,7 @@ export default function Modal({ point, onClick, user, onChange }) {
                 <div className="comment">
                   <div className="comment-header">
                     <div className="comment-author">
-                      {e.thumbnail ? (
-                        <img src={e.author.thumbnail} alt="" />
-                      ) : (
-                        <img
-                          src="https://media.discordapp.net/attachments/697512026251067472/711345678885847140/user-solid.png"
-                          alt=""
-                        />
-                      )}
+                        <img src={e.author.thumbnail? e.author.thumbnail: "https://media.discordapp.net/attachments/697512026251067472/711345678885847140/user-solid.png"} alt="" />
                       <span>{e.author.name}</span>
                     </div>
                     <div className="comment-rating">
