@@ -43,7 +43,7 @@ export default function Nav({history}) {
               Meu perfil
             </li>
           </Link>
-          <Link to="/profile">
+          <Link to="/favorites">
             <li className="nav-item">
               <FaHeart size={48} color="#f9f4f0" />
               Favoritos
