@@ -25,6 +25,11 @@ Encontre as melhores paradas de pernoite e alimentação para você e seu caminh
   <img alt="Estimulo" src=".github/Halt_showcase.png" width="100%">
 </p>
 
+
+## ⚠️ Atenção
+
+ Este é um projeto com a iniciativa do hackathon da Shawee patrocinado pela (CCR)[http://www.grupoccr.com.br/hackathonccr/].  Todo o protótipo está funcional e pronto para uso.
+
 ## 💻 Projeto
 
 O Halt é uma plataforma que visa conectar caminhoneiros a pontos de locação e pousada com o âmbito de promoter o bem estar social e de vida dos seus usuários.
@@ -76,3 +81,8 @@ yarn start
 
 
 Visite http://localhost:3000 com o seu navegador para ver o resultado. 🎉
+
+
+## :memo: Licença
+
+Esse projeto está sob a licença MIT. Veja o arquivo [LICENSE](LICENSE.md) para mais detalhes.
