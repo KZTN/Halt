@@ -51,7 +51,7 @@ git clone https://github.com/KZTN/Halt.git
 Navegando até a pasta do projeto:
 
 ```
-cd COVID-RN
+cd Halt
 ```
 
 Crie um arquivo `.env` na raíz do projeto e adicione as seguintes linhas:
