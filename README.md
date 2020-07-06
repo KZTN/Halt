@@ -32,8 +32,7 @@ Encontre as melhores paradas de pernoite e alimentação para você e seu caminh
 
 ## 💻 Projeto
 
-O Halt é uma plataforma que une o planejamento de negócio voltado para apoio do empreendedo com suas vendas e uma relação mais próxima com seu cliente.
-
+O Halt é uma plataforma que visa conectar caminhoneiros a pontos de locação e pousada com o âmbito de promoter o bem estar social e de vida dos seus usuários.
 ## Começando...
 Essas instruções fornecerão uma cópia do projeto em execução na sua máquina local para fins de desenvolvimento e teste.
 
