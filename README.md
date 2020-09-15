@@ -28,7 +28,8 @@ Encontre as melhores paradas de pernoite e alimentação para você e seu caminh
 
 ## ⚠️ Atenção
 
- Este é um projeto com a iniciativa do hackathon da Shawee patrocinado pela [CCR](http://www.grupoccr.com.br/hackathonccr/).  Todo o protótipo está funcional e pronto para uso.
+-  Este é um projeto com a iniciativa do hackathon da Shawee patrocinado pela [CCR](http://www.grupoccr.com.br/hackathonccr/).  Todo o protótipo está funcional e pronto para uso.
+- O projeto está descontinuado e arquivado.
 
 ## 💻 Projeto
 
